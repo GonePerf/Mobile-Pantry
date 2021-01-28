@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <a href=""><ion-icon name="arrow-undo-outline"></ion-icon></a> &nbsp;Welcome to your Pantry 
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+
+    <!-- <ion-list-header>
+      <ion-label><ion-title>Lista produktów</ion-title> </ion-label>
+    </ion-list-header> -->
+    <ion-searchbar placeholder="Szukaj" [(ngModel)]="searchFrase" name="search"></ion-searchbar>
+    <ion-item>
+      <ion-label class="adding"><ion-button color="success" (click) ="addProduct()">Dodaj</ion-button></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Ilość:Nazwa</b><p><b>Pozostało</b> </p></ion-label>
+    </ion-item>
+    <ng-container *ngFor="let prod of normalProductList; let i = index">
+      <ion-item *ngIf="filterByName(prod)">
+        <ion-label class="item-list whole-item-list"><b class="quantity">{{ prod.quantity }}</b> <i (click)="infoProductAlert(prod)">{{ prod.product_name | slice: 0:19}}</i>  <ion-icon (click)="deleteProductWithQuantity(prod)" class="threeDays" name="trash-outline"></ion-icon><ion-icon (click)="deleteProduct(prod)" class="threeDays" name="restaurant-outline"></ion-icon><p [ngClass]="{'threeDays' : compareDate(prod.exp_date)}" >{{ countDaysToExp(prod) }} dni</p></ion-label>
+      </ion-item>
+    </ng-container>
+    
+
+  </ion-list>
+</ion-content>
